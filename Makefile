@@ -26,6 +26,7 @@ endif
 NAME		=	more-sandbox
 ifeq ($(OS),Windows_NT)
 	PATH_BIN	=	bin\$(NAME)
+	NAME		:=	$(NAME).exe
 else
 	PATH_BIN	=	bin/$(NAME)
 endif
