@@ -1,5 +1,7 @@
 
-MY_SOURCES	=	main.cpp
+MY_SOURCES	=	main.cpp	\
+				Player.cpp	\
+				draw.cpp
 
 
 ifeq ($(OS),Windows_NT)
