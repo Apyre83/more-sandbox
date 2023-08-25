@@ -5,13 +5,14 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <sstream>
 
 class Player;
 
 #include "Player.hpp"
 
-#define NB_CELLS_X 40
-#define NB_CELLS_Y 40
+#define NB_CELLS_X 50
+#define NB_CELLS_Y 50
 #define BORDER_WIDTH 1
 
 

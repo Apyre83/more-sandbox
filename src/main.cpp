@@ -69,7 +69,7 @@ void    handleEvents(sf::RenderWindow& window, int& buildingMode, std::vector<st
 int main() {
 
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-    sf::RenderWindow window(desktop, "Game of Life", sf::Style::Fullscreen);
+    sf::RenderWindow window(desktop, "Life of an employee", sf::Style::Fullscreen);
     sf::Vector2<float> desktopSize = { static_cast<float>(desktop.size.x), static_cast<float>(desktop.size.y) };
 
     window.setFramerateLimit(60);
@@ -77,7 +77,7 @@ int main() {
     std::vector<std::vector<int>> cells(NB_CELLS_X, std::vector<int>(NB_CELLS_Y, 0));
 
 
-    sf::Vector2<float> gridSize = { static_cast<float>(desktopSize.x * 0.70), desktopSize.y };
+    sf::Vector2<float> gridSize = { desktopSize.x * 0.70f, desktopSize.y };
     sf::Vector2<float> cellSize = { gridSize.x / NB_CELLS_X, gridSize.y / NB_CELLS_Y };
 
 
@@ -106,22 +106,56 @@ int main() {
         return 1;
     }
 
-    sf::Text buildingInfo(font);
+    sf::Text	buildingInfo(font);
     buildingInfo.setCharacterSize(24);
     buildingInfo.setFillColor(sf::Color::White);
     buildingInfo.setPosition({ gridSize.x + 10, 0 });
+	buildingInfo.setString("Building mode: " + buildings[buildingMode].first);
 
     sf::Text    simulationInfo(font);
     simulationInfo.setCharacterSize(24);
     simulationInfo.setFillColor(sf::Color::White);
-    simulationInfo.setPosition({ gridSize.x + 10, 50 });
+    simulationInfo.setPosition({ gridSize.x + 10, buildingInfo.getGlobalBounds().height + 10 });
+	simulationInfo.setString("Simulation: " + std::string(isPlaying ? "ON" : "OFF"));
+
+	sf::Clock	clock;
+	int			fps = 0;
+	sf::Text	fpsInfo(font);
+	fpsInfo.setCharacterSize(24);
+	fpsInfo.setFillColor(sf::Color::White);
+	fpsInfo.setPosition({ gridSize.x + 10, simulationInfo.getGlobalBounds().height + buildingInfo.getGlobalBounds().height + 20 });
 
 
     // Store the players
     std::vector<Player> players;
 
 
+
+	// TEST PLAYER REPRESENTATION
+	sf::RectangleShape playerRepresentation({cellSize.x * .75f, cellSize.y * .75f}); // Body
+	playerRepresentation.setFillColor(sf::Color::Blue);
+	playerRepresentation.setPosition({ 50.0f, 50.0f });
+	playerRepresentation.setOrigin({ 5.0f, 5.0f });
+
+	sf::CircleShape head(5.0f); // Head
+	head.setFillColor(sf::Color::Red);
+	head.setPosition({ 50.0f, 5 });
+	head.setOrigin({ 5.0f, 5.0f });
+
+	sf::RectangleShape weapon({ 5.0f, 20.0f }); // Arm
+	weapon.setFillColor(sf::Color::Green);
+	weapon.setPosition({ 50.0f, 50.0f });
+	weapon.setOrigin({ 2.5f, 2.5f });
+
+
+
+
+
     while (window.isOpen()) {
+
+		sf::Time	elapsed = clock.restart();
+		float		seconds = elapsed.asSeconds();
+		fps = static_cast<int>(1.f / seconds);
 
         handleEvents(window, buildingMode, cells, isPlaying, players, cellSize);
 
@@ -137,6 +171,7 @@ int main() {
 
         buildingInfo.setString("Building mode: " + buildings[buildingMode].first);
         simulationInfo.setString("Simulation: " + std::string(isPlaying ? "ON" : "OFF"));
+		fpsInfo.setString("FPS: " + std::to_string(fps));
 
         window.clear();
 
@@ -145,8 +180,15 @@ int main() {
 
 
         window.draw(lines);
+
         window.draw(buildingInfo);
         window.draw(simulationInfo);
+		window.draw(fpsInfo);
+
+		// TEST PLAYER REPRESENTATION
+		window.draw(playerRepresentation);
+		window.draw(head);
+		window.draw(weapon);
 
         window.display();
     }
