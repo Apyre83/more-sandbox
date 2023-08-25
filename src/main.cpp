@@ -132,20 +132,31 @@ int main() {
 
 
 	// TEST PLAYER REPRESENTATION
-	sf::RectangleShape playerRepresentation({cellSize.x * .75f, cellSize.y * .75f}); // Body
+	/*sf::RectangleShape playerRepresentation({cellSize.x * .75f, cellSize.y * 1.25f}); // Body
 	playerRepresentation.setFillColor(sf::Color::Blue);
 	playerRepresentation.setPosition({ 50.0f, 50.0f });
 	playerRepresentation.setOrigin({ 5.0f, 5.0f });
 
 	sf::CircleShape head(5.0f); // Head
-	head.setFillColor(sf::Color::Red);
-	head.setPosition({ 50.0f, 5 });
+	head.setFillColor(sf::Color::White);
+	head.setPosition({ 55.0f, 45.0f });
 	head.setOrigin({ 5.0f, 5.0f });
 
-	sf::RectangleShape weapon({ 5.0f, 20.0f }); // Arm
-	weapon.setFillColor(sf::Color::Green);
-	weapon.setPosition({ 50.0f, 50.0f });
-	weapon.setOrigin({ 2.5f, 2.5f });
+	sf::RectangleShape leftArm({ cellSize.x * 0.35f, cellSize.y * 0.25f }); // Arm
+	leftArm.setFillColor(sf::Color::White);
+	leftArm.setPosition({ 35.5f, 52.5f });
+
+	sf::RectangleShape rightArm({ cellSize.x * 0.35f, cellSize.y * 0.25f }); // Arm
+	rightArm.setFillColor(sf::Color::White);
+	rightArm.setPosition({ 65.5f, 52.5f });
+
+	sf::RectangleShape leftLeg({ cellSize.x * 0.25f, cellSize.y * 0.35f });
+	leftLeg.setFillColor(sf::Color::White);
+	leftLeg.setPosition({ 45.0f, 75.0f });
+
+	sf::RectangleShape rightLeg({ cellSize.x * 0.25f, cellSize.y * 0.35f });
+	rightLeg.setFillColor(sf::Color::White);
+	rightLeg.setPosition({ 60.0f, 75.0f });*/
 
 
 
@@ -186,9 +197,13 @@ int main() {
 		window.draw(fpsInfo);
 
 		// TEST PLAYER REPRESENTATION
+		/*
 		window.draw(playerRepresentation);
 		window.draw(head);
-		window.draw(weapon);
+		window.draw(leftArm);
+		window.draw(rightArm);
+		window.draw(leftLeg);
+		window.draw(rightLeg);*/
 
         window.display();
     }
